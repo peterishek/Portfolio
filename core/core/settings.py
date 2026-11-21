@@ -31,7 +31,7 @@ SECRET_KEY = 'django-insecure-oyj3q)##fd^(!u79430lr94jqbvlb5+)3ga!kd2d&ek7hngham
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS".split(","))
 
 
 # Application definition
@@ -165,3 +165,4 @@ WAGTAIL_SITE_NAME = " Peter's Portfolio "
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
+
