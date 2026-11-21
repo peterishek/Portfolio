@@ -1,0 +1,15 @@
+# --- core (Django, django-taggit, django-modelcluster and Willow come with Wagtail) ---
+wagtail>=7.0
+Pillow
+
+# --- database: PostgreSQL such as Aiven or Supabase ---
+psycopg[binary]
+dj-database-url
+
+# --- deployment ---
+gunicorn
+whitenoise
+python-dotenv
+
+# --- only if you store uploaded images in S3-compatible storage ---
+# django-storages[s3]
