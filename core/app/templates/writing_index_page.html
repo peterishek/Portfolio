@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags %}
+{% block sec %}writings{% endblock %}
+{% block content %}
+<div class="wrap"><div class="page">
+  <a class="back" href="/">← Home</a>
+  <h2>{{ page.title }}</h2>
+  {% if page.intro %}<p class="say">{{ page.intro }}</p>{% endif %}
+  {% for w in writings %}<a class="row post" href="{% pageurl w %}">
+      <time datetime="{{ w.date|date:'Y-m-d' }}">{{ w.date|date:"d M Y" }}</time>
+      <div>
+        <h3>{{ w.title }}</h3>
+        <p>{{ w.excerpt|truncatewords:30 }}</p>
+      </div>
+      <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" aria-hidden="true"><path d="M3 12h17M13 5l7 7-7 7"/></svg></span>
+    </a>{% empty %}<p class="note">Nothing here yet.</p>{% endfor %}
+  {% if writings.paginator.num_pages > 1 %}
+<nav class="pager" aria-label="Pagination">
+  {% if writings.has_previous %}<a href="?page={{ writings.previous_page_number }}"><small>← Newer</small><b>Page {{ writings.previous_page_number }}</b></a>{% else %}<span></span>{% endif %}
+  {% if writings.has_next %}<a href="?page={{ writings.next_page_number }}"><small>Older →</small><b>Page {{ writings.next_page_number }}</b></a>{% else %}<span></span>{% endif %}
+</nav>
+<p class="note">Page {{ writings.number }} of {{ writings.paginator.num_pages }}</p>
+{% endif %}
+</div></div>
+{% endblock %}

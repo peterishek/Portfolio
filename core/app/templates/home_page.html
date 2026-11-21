@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags %}
+{% block title %}Portfolio{% endblock %}
+{% block content %}
+<div class="wrap">
+  <section id="home" class="hero">
+    <h1 aria-label="Eguonorijesu Peter Isheke">
+      <span class="ln"><b>Eguonorijesu</b></span><span class="ln"><b>Peter</b></span><span class="ln"><b>Isheke</b></span>
+    </h1>
+    <div class="grid">
+      <div>
+        <p class="say">Building and programming things that think, from schematic to shipped product.</p>
+        <div class="stats">
+          <div><b>12</b><span>boards designed</span></div>
+          <div><b>20+</b><span>products shipped</span></div>
+          <div><b>7y+</b><span>writing and engineering</span></div>
+          <div><b>NG</b><span>based in FCT, Nigeria</span></div>
+        </div>
+      </div>
+      <figure class="pic" style="margin-bottom:10px">
+        <img alt="Portrait placeholder" src="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 500'%3E%3Crect width='400' height='500' fill='%23d8d6cf'/%3E%3Ccircle cx='200' cy='190' r='78' fill='%23a9a69d'/%3E%3Cpath d='M50 500c0-110 66-170 150-170s150 60 150 170z' fill='%23a9a69d'/%3E%3C/svg%3E">
+      </figure>
+    </div>
+  </section>
+</div>
+
+<div class="tick" aria-hidden="true"><div>Firmware ✶ Hardware ✶ Products ✶ Software ✶ Data ✶ Firmware ✶ Backend </div></div>
+
+<div class="wrap">
+  <section id="now">
+    <h2>Now</h2>
+    <div class="cells">
+      <article><h3>Building</h3><p>Backend for a payment provider that uses lowest bandwith and applying security.</p></article>
+      <article><h3>Learning</h3><p>C++ and intricacies of embedded system & software</p></article>
+      <article><h3>Reading</h3><p>Designing Data Intensive Applications</p></article>
+    </div>
+  </section>
+
+  <section id="projects">
+    <h2>Projects</h2>
+    {% for p in latest_projects %}
+    <a class="row" href="{% pageurl p %}">
+      <div>
+        <span class="role">{{ p.role }}{% if p.year %}, {{ p.year }}{% endif %}</span>
+        <h3>{{ p.title }}</h3>
+        <p>{{ p.summary|truncatewords:30 }}</p>
+        <div class="tags">{% for t in p.tags.all %}<span>{{ t }}</span>{% endfor %}</div>
+      </div>
+      <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" aria-hidden="true"><path d="M3 12h17M13 5l7 7-7 7"/></svg></span>
+    </a>
+    {% endfor %}
+    <a class="all" href="/projects/">All projects →</a>
+  </section>
+
+  <section id="writings">
+    <h2>Writings</h2>
+    {% for w in latest_writings %}
+    <a class="row post" href="{% pageurl w %}">
+      <time datetime="{{ w.date|date:'Y-m-d' }}">{{ w.date|date:"d M Y" }}</time>
+      <div>
+        <h3>{{ w.title }}</h3>
+        <p>{{ w.excerpt|truncatewords:30 }}</p>
+      </div>
+      <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" aria-hidden="true"><path d="M3 12h17M13 5l7 7-7 7"/></svg></span>
+    </a>
+    {% endfor %}
+    <a class="all" href="/writings/">All writing →</a>
+  </section>
+
+  <section id="bio">
+    <h2>Bio</h2>
+    <p class="lead">Born in <mark>Delta State, Nigeria</mark>. Studied <mark>Mathematics and Statistics</mark>. Now building <mark>software products</mark> and learning in public.</p>
+    <dl class="bio">
+      <div><dt>Born</dt><dd>Delta State, Nigeria</dd></div>
+      <div><dt>Studied</dt><dd>Department of Mathematics and Statistics, University of Port-Harcourt</dd></div>
+      <div><dt>Before</dt><dd>Lead Backend Engineer</dd></div>
+    </dl>
+  </section>
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <a class="mail" href="mailto:you@example.com">peterishek@outlook.com</a>
+    <div class="socials"><a href="https://www.linkedin.com/in/your-handle" target="_blank" rel="noopener noreferrer"><span>LinkedIn</span><span aria-hidden="true">↗</span></a>
+<a href="https://www.instagram.com/peterisheke_sats" target="_blank" rel="noopener noreferrer"><span>Instagram</span><span aria-hidden="true">↗</span></a>
+<a href="https://x.com/peterishek" target="_blank" rel="noopener noreferrer"><span>X</span><span aria-hidden="true">↗</span></a>
+<a href="https://github.com/peterishek" target="_blank" rel="noopener noreferrer"><span>GitHub</span><span aria-hidden="true">↗</span></a></div>
+  </section>
+</div>
+{% endblock %}

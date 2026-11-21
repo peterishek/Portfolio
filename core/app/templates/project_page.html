@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags %}
+{% block sec %}projects{% endblock %}
+{% block content %}
+<div class="wrap"><article class="page">
+  <a class="back" href="{{ page.get_parent.url }}">← All projects</a>
+  <span class="role">{{ page.role }}{% if page.year %}, {{ page.year }}{% endif %}</span>
+  <h1 class="dh">{{ page.title }}</h1>
+  <div class="tags">{% for t in page.tags.all %}<span>{{ t }}</span>{% endfor %}</div>
+  <div class="prose">{% for block in page.body %}{% if block.block_type == "heading" %}<h2>{{ block.value }}</h2>{% elif block.block_type == "image" %}{% image block.value width-1200 %}{% elif block.block_type == "code" %}<pre><code>{{ block.value.code }}</code></pre>{% else %}{% include_block block %}{% endif %}{% endfor %}</div>
+  {% if page.links.all %}<div class="socials">{% for l in page.links.all %}<a href="{{ l.url }}" target="_blank" rel="noopener noreferrer"><span>{{ l.label }}</span><span aria-hidden="true">↗</span></a>{% endfor %}</div>{% endif %}
+  <div class="pager">
+  {% if previous_page %}<a href="{% pageurl previous_page %}"><small>← Previous</small><b>{{ previous_page.title }}</b></a>{% else %}<span></span>{% endif %}
+  {% if next_page %}<a href="{% pageurl next_page %}"><small>Next →</small><b>{{ next_page.title }}</b></a>{% else %}<span></span>{% endif %}
+</div>
+</article></div>
+{% endblock %}

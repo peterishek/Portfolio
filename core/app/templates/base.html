@@ -1,0 +1,45 @@
+{% load static %}<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>{% block title %}{{ page.seo_title|default:page.title }}{% endblock %} – Eguonorijesu Peter Isheke</title>
+{% if page.search_description %}<meta name="description" content="{{ page.search_description }}">{% endif %}
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body data-sec="{% block sec %}home{% endblock %}">
+<header class="top">
+  <a class="mark" href="/">EPI<i>.</i></a>
+  <nav class="nav" id="nav">
+    <a href="/" data-sec="home">Home</a><a href="/#now" data-sec="now">Now</a><a href="/projects/" data-sec="projects">Projects</a><a href="/writings/" data-sec="writings">Writings</a><a href="/#bio" data-sec="bio">Bio</a><a href="/#contact" data-sec="contact">Contact</a>
+  </nav>
+</header>
+<main>
+{% block content %}{% endblock %}
+</main>
+<footer>
+  <div class="wrap">
+    <div class="fgrid">
+      <div>
+        <p class="fbig">Let’s build something.</p>
+        <a class="fmail" href="mailto:you@example.com">peterishek@outlook.com</a>
+      </div>
+      <nav aria-label="Footer">
+        <h4>Pages</h4>
+        <a href="/#now">Now</a><a href="/projects/">Projects</a><a href="/writing/">Writings</a><a href="/#bio">Bio</a><a href="/#contact">Contact</a>
+      </nav>
+      <div>
+        <h4>Elsewhere</h4>
+        <a href="https://www.linkedin.com/in/your-handle" target="_blank" rel="noopener noreferrer"><span>LinkedIn</span></a>
+<a href="https://www.instagram.com/peterisheke_sats" target="_blank" rel="noopener noreferrer"><span>Instagram</span></a>
+<a href="https://x.com/peterishek" target="_blank" rel="noopener noreferrer"><span>X</span></a>
+<a href="https://github.com/peterishek" target="_blank" rel="noopener noreferrer"><span>GitHub</span></a>
+      </div>
+    </div>
+    <div class="fbase"><span>© {% now "Y" %} Eguonorijesu Peter Isheke</span><a href="/">Back to top ↑</a></div>
+  </div>
+</footer>
+<script src="{% static 'js/app.js' %}" defer></script>
+</body>
+</html>

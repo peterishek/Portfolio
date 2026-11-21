@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags %}
+{% block sec %}projects{% endblock %}
+{% block content %}
+<div class="wrap"><div class="page">
+  <a class="back" href="/">← Home</a>
+  <h2>{{ page.title }}</h2>
+  {% if page.intro %}<p class="say">{{ page.intro }}</p>{% endif %}
+  {% for p in projects %}<a class="row" href="{% pageurl p %}">
+      <div>
+        <span class="role">{{ p.role }}{% if p.year %}, {{ p.year }}{% endif %}</span>
+        <h3>{{ p.title }}</h3>
+        <p>{{ p.summary|truncatewords:30 }}</p>
+        <div class="tags">{% for t in p.tags.all %}<span>{{ t }}</span>{% endfor %}</div>
+      </div>
+      <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" aria-hidden="true"><path d="M3 12h17M13 5l7 7-7 7"/></svg></span>
+    </a>{% empty %}<p class="note">Nothing here yet.</p>{% endfor %}
+  {% if projects.paginator.num_pages > 1 %}
+<nav class="pager" aria-label="Pagination">
+  {% if projects.has_previous %}<a href="?page={{ projects.previous_page_number }}"><small>← Newer</small><b>Page {{ projects.previous_page_number }}</b></a>{% else %}<span></span>{% endif %}
+  {% if projects.has_next %}<a href="?page={{ projects.next_page_number }}"><small>Older →</small><b>Page {{ projects.next_page_number }}</b></a>{% else %}<span></span>{% endif %}
+</nav>
+<p class="note">Page {{ projects.number }} of {{ projects.paginator.num_pages }}</p>
+{% endif %}
+</div></div>
+{% endblock %}
